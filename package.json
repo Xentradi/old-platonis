@@ -1,9 +1,9 @@
 {
-	"name": "x3n",
+	"name": "Platonis",
 	"version": "1.0.0",
-	"description": "Discord bot for misc server management",
-	"main": "index.js",
-	"repository": "git@github.com:Xentradi/x3n.git",
+	"description": "Cephalon for clan discord",
+	"main": "platonis.js",
+	"repository": "git@github.com:Xentradi/platonis.git",
 	"author": "Xentradi <ikaika@xentradi.com>",
 	"license": "MIT",
 	"scripts": {
