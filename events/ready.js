@@ -27,7 +27,7 @@ module.exports = client => {
 	});
 	request('https://wf.snekw.com/ability-wiki', { json: true }, (err, res, body) => {
 		if (err) { return console.log(err); }
-		client.warframe.abilities = body.data.Warframe;
+		client.warframe.abilities = body.data.Ability;
 		client.logger.log('info', 'warframe.abilities updated');
 	});
 };

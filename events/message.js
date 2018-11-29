@@ -12,7 +12,7 @@ module.exports = (client, message) => {
 		console.log('link item');
 		const submatch = matches[1];
 		const args = submatch.trim().split(/ +/g);
-		const command = 'mod';
+		const command = 'link';
 		const cmd = client.commands.get(command);
 		return cmd.run(client, message, args);
 	}

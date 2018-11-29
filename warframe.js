@@ -1,6 +1,9 @@
 module.exports = {
 	fetchMods,
 	fetchWikiImage,
+	embedWarframe,
+	embedMod,
+	embedAbility,
 };
 
 function fetchMods(vModName) {
@@ -15,7 +18,7 @@ function fetchMods(vModName) {
 
 function fetchWikiImage(vFilename) {
 	const url = 'https://warframe.fandom.com/wiki/File:' + vFilename;
-	console.log(url);
+	client.logger.log(url);
 	const rp = require('request-promise');
 	const cheerio = require('cheerio');
 	const options = {
@@ -28,7 +31,7 @@ function fetchWikiImage(vFilename) {
 		rp(options)
 			.then((imgs) => {
 				const theImages = imgs('img');
-				console.log(theImages[1].attribs['data-src']);
+				// console.log(theImages[1].attribs['data-src']);
 				return resolve(theImages[1].attribs['data-src']);
 			})
 			.catch((err) => {
@@ -36,4 +39,96 @@ function fetchWikiImage(vFilename) {
 			});
 	});
 
+}
+
+function embedWarframe(client, message, vData, vUrlName) {
+	const Discord = require('discord.js');
+	let vaulted = '';
+	if (!vData.Vaulted) {
+		vaulted = 'N/A';
+	}
+	else {
+		vaulted = vData.Vaulted;
+	}
+	const embed = new Discord.RichEmbed()
+		.setTitle(`__**${vData.Name}**__`)
+		.addField('__Vaulted__', vaulted, false)
+		.addField('__Health__', vData.Health, true)
+		.addField('__Energy__', vData.Energy, true)
+		.addField('__Armor__', vData.Armor, true)
+		.addField('__Sprint Speed__', vData.Sprint, true)
+		.addField('__Aura Polarity__', vData.AuraPolarity, true)
+		.addField('__Polarities__', vData.Polarities, true)
+		.setURL('https://warframe.fandom.com/wiki/' + vUrlName)
+		.setThumbnail(client.user.displayAvatarURL);
+	message.channel.send(embed).then(m => {
+		client.warframe.fetchWikiImage(vData.Image).then((result) => {
+			const imageEmbed = new Discord.RichEmbed()
+				.setTitle(`__**${vData.Name}**__`)
+				.addField('__Vaulted__', vaulted, false)
+				.addField('__Health__', vData.Health, true)
+				.addField('__Energy__', vData.Energy, true)
+				.addField('__Armor__', vData.Armor, true)
+				.addField('__Sprint Speed__', vData.Sprint, true)
+				.addField('__Aura Polarity__', vData.AuraPolarity, true)
+				.addField('__Polarities__', vData.Polarities, true)
+				.setURL('https://warframe.fandom.com/wiki/' + vUrlName)
+				.setThumbnail(client.user.displayAvatarURL)
+				.setImage(result);
+			m.edit(imageEmbed);
+		});
+	}).catch((err) => {
+		console.error(err);
+	});
+}
+
+function embedMod(client, message, vData, vUrlName) {
+	const Discord = require('discord.js');
+	const embed = new Discord.RichEmbed()
+		.setTitle(`__**${vData.Name}**__`)
+		.addField('Rarity', vData.Rarity, true)
+		.addField('Polarity', vData.Polarity, true)
+		.setURL('https://warframe.fandom.com/wiki/' + vUrlName)
+		.setThumbnail(client.user.displayAvatarURL);
+	message.channel.send(embed).then(m => {
+		client.warframe.fetchWikiImage(vData.Image).then((result) => {
+			const imageEmbed = new Discord.RichEmbed()
+				.setTitle(`__**${vData.Name}**__`)
+				.setImage(result)
+				.addField('Rarity', vData.Rarity, true)
+				.addField('Polarity', vData.Polarity, true)
+				.setThumbnail(client.user.displayAvatarURL)
+				.setURL('https://warframe.fandom.com/wiki/' + vUrlName);
+			m.edit(imageEmbed);
+		});
+
+
+	}).catch((err) => {
+		console.error(err);
+	});
+}
+
+function embedAbility(client, message, vData, vName, vUrlName) {
+	const Discord = require('discord.js');
+	const embed = new Discord.RichEmbed()
+		.setTitle(`__**${vName}**__`)
+		.addField('Description', vData.Description, false)
+		.addField('Warframe', vData.Warframe, true)
+		.addField('Key', vData.Key, true);
+	message.channel.send(embed).then(m => {
+		client.warframe.fetchWikiImage(vData.WhiteIcon).then((result) => {
+			const imageEmbed = new Discord.RichEmbed()
+				.setTitle(`__**${vName}**__`)
+				.addField('Description', vData.Description, false)
+				.addField('Warframe', vData.Warframe, true)
+				.addField('Key', vData.Key, true)
+				.setThumbnail(result)
+				.setURL('https://warframe.fandom.com/wiki/' + vUrlName);
+			m.edit(imageEmbed);
+		});
+
+
+	}).catch((err) => {
+		console.error(err);
+	});
 }
