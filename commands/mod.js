@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
 		.addField('Polarity', mod.Polarity, true)
 		.setURL('https://warframe.fandom.com/wiki/' + urlName);
 	message.channel.send(embed).then(m => {
-		warframe.fetchModImage(mod.Image).then((result) => {
+		warframe.fetchWikiImage(mod.Image).then((result) => {
 			const imageEmbed = new Discord.RichEmbed()
 				.setTitle(`__**${mod.Name}**__`)
 				.setImage(result)

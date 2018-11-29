@@ -1,6 +1,6 @@
 module.exports = {
 	fetchMods,
-	fetchModImage,
+	fetchWikiImage,
 };
 
 function fetchMods(vModName) {
@@ -13,7 +13,7 @@ function fetchMods(vModName) {
 	});
 }
 
-function fetchModImage(vFilename) {
+function fetchWikiImage(vFilename) {
 	const url = 'https://warframe.fandom.com/wiki/File:' + vFilename;
 	console.log(url);
 	const rp = require('request-promise');

@@ -6,6 +6,16 @@ module.exports = (client, message) => {
 	if (message.content.toLowerCase() === 'trigger' || message.content.toLowerCase() === 'prefix') {
 		return message.reply(`My trigger is ${client.config.prefix}`);
 	}
+
+	const matches = message.content.match(/\[(.*?)\]/);
+	if (matches) {
+		console.log('link item');
+		const submatch = matches[1];
+		const args = submatch.trim().split(/ +/g);
+		const command = 'mod';
+		const cmd = client.commands.get(command);
+		return cmd.run(client, message, args);
+	}
 	{ if (message.content.indexOf(client.config.prefix) !== 0) return; }
 
 	// Our standard argument/command name definition.
