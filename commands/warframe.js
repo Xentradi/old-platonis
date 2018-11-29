@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
 		warframe.fetchWikiImage(data.Image).then((result) => {
 			const imageEmbed = new Discord.RichEmbed()
 				.setTitle(`__**${data.Name}**__`)
-				.addField('__Vaulted__', data.Vaulted, false)
+				.addField('__Vaulted__', vaulted, false)
 				.addField('__Health__', data.Health, true)
 				.addField('__Energy__', data.Energy, true)
 				.addField('__Armor__', data.Armor, true)
