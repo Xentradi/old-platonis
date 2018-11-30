@@ -18,7 +18,7 @@ function fetchMods(vModName) {
 
 function fetchWikiImage(client, vFilename) {
 	const url = 'https://warframe.fandom.com/wiki/File:' + vFilename;
-	client.logger.log(url);
+	client.logger.log('info', url);
 	const rp = require('request-promise');
 	const cheerio = require('cheerio');
 	const options = {
