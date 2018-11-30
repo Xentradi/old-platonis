@@ -16,7 +16,7 @@ function fetchMods(vModName) {
 	});
 }
 
-function fetchWikiImage(vFilename) {
+function fetchWikiImage(client, vFilename) {
 	const url = 'https://warframe.fandom.com/wiki/File:' + vFilename;
 	client.logger.log(url);
 	const rp = require('request-promise');
@@ -62,7 +62,7 @@ function embedWarframe(client, message, vData, vUrlName) {
 		.setURL('https://warframe.fandom.com/wiki/' + vUrlName)
 		.setThumbnail(client.user.displayAvatarURL);
 	message.channel.send(embed).then(m => {
-		client.warframe.fetchWikiImage(vData.Image).then((result) => {
+		client.warframe.fetchWikiImage(client, vData.Image).then((result) => {
 			const imageEmbed = new Discord.RichEmbed()
 				.setTitle(`__**${vData.Name}**__`)
 				.addField('__Vaulted__', vaulted, false)
@@ -91,7 +91,7 @@ function embedMod(client, message, vData, vUrlName) {
 		.setURL('https://warframe.fandom.com/wiki/' + vUrlName)
 		.setThumbnail(client.user.displayAvatarURL);
 	message.channel.send(embed).then(m => {
-		client.warframe.fetchWikiImage(vData.Image).then((result) => {
+		client.warframe.fetchWikiImage(client, vData.Image).then((result) => {
 			const imageEmbed = new Discord.RichEmbed()
 				.setTitle(`__**${vData.Name}**__`)
 				.setImage(result)
@@ -116,7 +116,7 @@ function embedAbility(client, message, vData, vName, vUrlName) {
 		.addField('Warframe', vData.Warframe, true)
 		.addField('Key', vData.Key, true);
 	message.channel.send(embed).then(m => {
-		client.warframe.fetchWikiImage(vData.WhiteIcon).then((result) => {
+		client.warframe.fetchWikiImage(client, vData.WhiteIcon).then((result) => {
 			const imageEmbed = new Discord.RichEmbed()
 				.setTitle(`__**${vName}**__`)
 				.addField('Description', vData.Description, false)
