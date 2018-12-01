@@ -31,7 +31,8 @@ exports.run = async (client, message, args) => {
 
 		message.member.addRole(targetRole.id);
 		const currentName = message.member.displayName;
-		return message.member.setNickname(`${currentName} [${clanName}]`).catch(message.reply('There was a problem changing your nickname, but you\'ve been added to the clans role.'));
+		message.member.setNickname(`${currentName} [${clanName}]`).catch(message.reply('There was a problem changing your nickname, but you\'ve been added to the clans role.'));
+		return;
 	}
 
 	if (command === 'leave') {
@@ -45,7 +46,8 @@ exports.run = async (client, message, args) => {
 		client.udf.commandReact(message, 1);
 
 		message.member.removeRole(targetRole);
-		return message.member.setNickname().catch(message.reply('There was a problem changing your nickname, but you\'ve been removed from the clans role.'));
+		message.member.setNickname().catch(message.reply('There was a problem changing your nickname, but you\'ve been removed from the clans role.'));
+		return;
 	}
 
 	if (command === 'add') {
@@ -57,8 +59,9 @@ exports.run = async (client, message, args) => {
 		// add stuff
 		client.udf.commandReact(message, 1);
 		message.guild.createRole({ name: clanName }, `Added by ${message.author}`)
-			.then(role => { return message.reply(`Added clan *${role.name}*`); })
+			.then(role => { message.reply(`Added clan *${role.name}*`); })
 			.catch(console.error);
+		return;
 	}
 
 	if (command === 'remove') {
@@ -71,6 +74,6 @@ exports.run = async (client, message, args) => {
 		// remove stuff
 		client.udf.commandReact(message, 1);
 		targetRole.delete(`Removed by: ${message.author}`).then(message.reply('Clan removed.')).catch(console.error);
-
+		return;
 	}
 };
