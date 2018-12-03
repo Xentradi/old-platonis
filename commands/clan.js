@@ -1,4 +1,5 @@
 exports.run = async (client, message, args) => {
+	if(message.guild.id !== '517875377494818826') return;
 	const prefix = client.config.prefix;
 	const usage = `*${prefix}clan <join|leave|add|remove> <clan name>*`;
 
