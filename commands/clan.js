@@ -34,6 +34,7 @@ exports.run = async (client, message, args) => {
 			const mes = message.reply(
 				'That is not a valid clan. Has your clan been added to the server yet?'
 			);
+			message.delete(8000);
 			mes.delete(10000);
 			return;
 		}
