@@ -144,7 +144,7 @@ function embedAbility(client, message, vData, vName, vUrlName) {
 		});
 }
 
-function embedWeapon(client, message, vData) {
+function embedWeaponMelee(client, message, vData, vUrlName) {
 	const Discord = require('discord.js');
 	let vaulted = '';
 	if (!vData.Traits.includes('Vaulted')) {
@@ -156,9 +156,9 @@ function embedWeapon(client, message, vData) {
 	const embed = new Discord.RichEmbed()
 		.setTitle(`__**${vData.Name}**__`)
 		.addField('__Vaulted__', vaulted, false)
-		.addField('__Class__', vData.Class, true)
 		.addField('__Mastery__', vData.Mastery, true)
-		.addField('__Polarities__', vData.Polarities, true)
+		.addField('__Slot__', vData.Type, true)
+		.addField('__Type__', vData.Class, true)
 		.setURL('https://warframe.fandom.com/wiki/' + vUrlName)
 		.setThumbnail(client.user.displayAvatarURL);
 	message.channel.send(embed).catch(err => {

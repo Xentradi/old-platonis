@@ -27,6 +27,16 @@ exports.run = async (client, message, args) => {
 	}
 	if (data.Class) {
 		client.logger.log('info', 'Weapon linked');
+		// sort weapon types
+		if (data.type === 'Primary') {
+			//
+		}
+		if (data.type === 'Secondary') {
+			//
+		}
+		if (data.type === 'Melee') {
+			client.warframe.embedWeaponMelee(client, message, data, urlName);
+		}
 		console.log(data);
 	}
 };
