@@ -31,7 +31,7 @@ exports.run = async (client, message, args) => {
 		if (!roles.has(targetRole.id)) {
 			client.udf.commandReact(message, 0);
 			console.log(message.guild.roles.has(targetRole));
-			const mes = message.reply(
+			const mes = await message.reply(
 				'That is not a valid clan. Has your clan been added to the server yet?'
 			);
 			message.delete(8000);
