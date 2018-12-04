@@ -4,7 +4,7 @@ module.exports = {
 	embedWarframe,
 	embedMod,
 	embedAbility,
-	embedWeapon,
+	embedWeaponMelee,
 };
 
 function fetchMods(vModName) {
