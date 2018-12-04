@@ -161,7 +161,5 @@ function embedWeaponMelee(client, message, vData, vUrlName) {
 		.addField('__Type__', vData.Class, true)
 		.setURL('https://warframe.fandom.com/wiki/' + vUrlName)
 		.setThumbnail(client.user.displayAvatarURL);
-	message.channel.send(embed).catch(err => {
-		console.error(err);
-	});
+	message.channel.send(embed);
 }

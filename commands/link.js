@@ -37,6 +37,5 @@ exports.run = async (client, message, args) => {
 		if (data.type === 'Melee') {
 			client.warframe.embedWeaponMelee(client, message, data, urlName);
 		}
-		console.log(data);
 	}
 };
