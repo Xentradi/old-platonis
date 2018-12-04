@@ -25,7 +25,8 @@ exports.run = async (client, message, args) => {
 	// check if role exists
 
 	if (command === 'join') {
-		const targetRole = message.guild.roles.find(x => x.name === clanName);
+		const targetRole =
+			message.guild.roles.find(x => x.name === clanName) || false;
 		const uvRole = message.guild.roles.find(x => x.name === 'uv');
 		if (!roles.has(targetRole.id)) {
 			client.udf.commandReact(message, 0);
