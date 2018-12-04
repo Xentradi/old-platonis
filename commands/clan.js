@@ -12,7 +12,6 @@ exports.run = async (client, message, args) => {
 	const command = args.shift().toLowerCase();
 	const clanName = args.join(' ').toLowerCase();
 	const roles = message.guild.roles;
-	// console.log(rolesArray);
 	if (
 		command !== 'join' &&
 		command !== 'leave' &&
@@ -22,7 +21,6 @@ exports.run = async (client, message, args) => {
 		client.udf.commandReact(message, 0);
 		return message.reply(usage);
 	}
-	// check if role exists
 
 	if (command === 'join') {
 		const targetRole =
