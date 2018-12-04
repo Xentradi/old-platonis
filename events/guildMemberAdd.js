@@ -1,6 +1,7 @@
 module.exports = (client, guildMember) => {
 	const lotusChildren = '517875377494818826';
-	const guild = guildMember.guild;
-	if (guild.id !== lotusChildren) return;
-	console.log('new member in lotusChildren');
+	const theGuild = guildMember.guild;
+	if (theGuild.id !== lotusChildren) return;
+	const uvRole = theGuild.roles.find(x => x.name === 'uv');
+	guildMember.setRoles(uvRole.id, 'Joined the server.');
 };
