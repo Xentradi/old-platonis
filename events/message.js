@@ -3,7 +3,10 @@ module.exports = (client, message) => {
 	if (message.author.bot) return;
 
 	// Ignore messages not starting with the prefix (in config.json)
-	if (message.content.toLowerCase() === 'trigger' || message.content.toLowerCase() === 'prefix') {
+	if (
+		message.content.toLowerCase() === 'trigger' ||
+		message.content.toLowerCase() === 'prefix'
+	) {
 		return message.reply(`My trigger is ${client.config.prefix}`);
 	}
 
@@ -16,7 +19,9 @@ module.exports = (client, message) => {
 		const cmd = client.commands.get(command);
 		return cmd.run(client, message, args);
 	}
-	{ if (message.content.indexOf(client.config.prefix) !== 0) return; }
+	{
+		if (message.content.indexOf(client.config.prefix) !== 0) return;
+	}
 
 	// Our standard argument/command name definition.
 	const args = message.content
