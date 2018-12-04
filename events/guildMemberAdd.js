@@ -3,5 +3,19 @@ module.exports = (client, guildMember) => {
 	const theGuild = guildMember.guild;
 	if (theGuild.id !== lotusChildren) return;
 	const uvRole = theGuild.roles.find(x => x.name === 'uv');
+
+	const welcomeMessage = `
+    Heya ${guildMember}! Welcome to the *Children of the Lotus.* We're glad you could join us.\r\n
+    Before you can jump into things and start socializing with the rest of the alliance we're going to need to know which clan you're a member of.\r\n
+    \r\n
+    All **you** need to do is type: \r\n
+    \`/clan join <clan name>\`\r\n
+    Replace \`<clan name>\` with the name of the clan you're in.\r\n
+    \r\n
+    \r\n
+    If
+     there is a problem you can contact @Xentradi#7749
+    `;
 	guildMember.addRole(uvRole.id);
+	guildMember.guild.channels.get('518314647699324948').send(welcomeMessage);
 };
