@@ -25,7 +25,6 @@ exports.run = async (client, message, args) => {
 	// check if role exists
 
 	if (command === 'join') {
-		message.delete();
 		const targetRole = message.guild.roles.find(x => x.name === clanName);
 		const uvRole = message.guild.roles.find(x => x.name === 'uv');
 		if (!roles.has(targetRole.id)) {
@@ -37,6 +36,7 @@ exports.run = async (client, message, args) => {
 			mes.delete(10000);
 			return;
 		}
+		message.delete();
 		client.udf.commandReact(message, 1);
 		message.member.removeRole(uvRole.id);
 		message.member.addRole(targetRole.id);
