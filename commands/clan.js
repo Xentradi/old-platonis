@@ -25,23 +25,23 @@ exports.run = async (client, message, args) => {
 	// check if role exists
 
 	if (command === 'join') {
+		message.delete();
 		const targetRole = message.guild.roles.find(x => x.name === clanName);
 		const uvRole = message.guild.roles.find(x => x.name === 'uv');
 		if (!roles.has(targetRole.id)) {
 			client.udf.commandReact(message, 0);
 			console.log(message.guild.roles.has(targetRole));
-			return message.reply(
+			const mes = message.reply(
 				'That is not a valid clan. Has your clan been added to the server yet?'
 			);
+			mes.delete(10000);
+			return;
 		}
 		client.udf.commandReact(message, 1);
 		message.member.removeRole(uvRole.id);
 		message.member.addRole(targetRole.id);
 		const currentName = message.member.displayName;
 		message.member.setNickname(`${currentName} [${clanName}]`).catch(err => {
-			message.reply(
-				'There was a problem changing your nickname, but you\'ve been added to the clans role.'
-			);
 			console.error(err);
 		});
 		return;
