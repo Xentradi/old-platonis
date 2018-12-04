@@ -4,7 +4,7 @@ module.exports = {
 	embedWarframe,
 	embedMod,
 	embedAbility,
-	embedWeaponMelee,
+	embedWeapon,
 };
 
 function fetchMods(vModName) {
@@ -143,8 +143,7 @@ function embedAbility(client, message, vData, vName, vUrlName) {
 			console.error(err);
 		});
 }
-
-function embedWeaponMelee(client, message, vData, vUrlName) {
+function embedWeapon(client, message, vData, vUrlName) {
 	const Discord = require('discord.js');
 	let vaulted = '';
 	if (!vData.Traits.includes('Vaulted')) {
@@ -155,7 +154,7 @@ function embedWeaponMelee(client, message, vData, vUrlName) {
 	}
 	const embed = new Discord.RichEmbed()
 		.setTitle(`__**${vData.Name}**__`)
-		.addField('__Vaulted__', vaulted, false)
+		.addField('__Vaulted__', vaulted, true)
 		.addField('__Mastery__', vData.Mastery, true)
 		.addField('__Slot__', vData.Type, true)
 		.addField('__Type__', vData.Class, true)
