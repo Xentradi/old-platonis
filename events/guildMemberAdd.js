@@ -3,5 +3,5 @@ module.exports = (client, guildMember) => {
 	const theGuild = guildMember.guild;
 	if (theGuild.id !== lotusChildren) return;
 	const uvRole = theGuild.roles.find(x => x.name === 'uv');
-	guildMember.setRoles(uvRole.id, 'Joined the server.');
+	guildMember.addRole(uvRole.id);
 };
