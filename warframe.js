@@ -1,13 +1,8 @@
-module.exports = {
-	fetchMods,
-	fetchWikiImage,
-	embedWarframe,
-	embedMod,
-	embedAbility,
-	embedWeapon,
-};
+var exports = module.exports = {};
 
-function fetchMods(vModName) {
+exports.api = 'https://api.warframestat.us/';
+
+exports.fetchMods = function(vModName) {
 	const request = require('request');
 	return new Promise(function(resolve, reject) {
 		request(
@@ -21,9 +16,9 @@ function fetchMods(vModName) {
 			}
 		);
 	});
-}
+};
 
-function fetchWikiImage(client, vFilename) {
+exports.fetchWikiImage = function(client, vFilename) {
 	const url = 'https://warframe.fandom.com/wiki/File:' + vFilename;
 	client.logger.log('info', url);
 	const rp = require('request-promise');
@@ -45,9 +40,9 @@ function fetchWikiImage(client, vFilename) {
 				return reject(err);
 			});
 	});
-}
+};
 
-function embedWarframe(client, message, vData, vUrlName) {
+exports.embedWarframe = function(client, message, vData, vUrlName) {
 	const Discord = require('discord.js');
 	let vaulted = '';
 	if (!vData.Vaulted) {
@@ -89,9 +84,9 @@ function embedWarframe(client, message, vData, vUrlName) {
 		.catch(err => {
 			console.error(err);
 		});
-}
+};
 
-function embedMod(client, message, vData, vUrlName) {
+exports.embedMod = function(client, message, vData, vUrlName) {
 	const Discord = require('discord.js');
 	const embed = new Discord.RichEmbed()
 		.setTitle(`__**${vData.Name}**__`)
@@ -116,9 +111,9 @@ function embedMod(client, message, vData, vUrlName) {
 		.catch(err => {
 			console.error(err);
 		});
-}
+};
 
-function embedAbility(client, message, vData, vName, vUrlName) {
+exports.embedAbility = function(client, message, vData, vName, vUrlName) {
 	const Discord = require('discord.js');
 	const embed = new Discord.RichEmbed()
 		.setTitle(`__**${vName}**__`)
@@ -142,8 +137,8 @@ function embedAbility(client, message, vData, vName, vUrlName) {
 		.catch(err => {
 			console.error(err);
 		});
-}
-function embedWeapon(client, message, vData, vUrlName) {
+};
+exports.embedWeapon = function(client, message, vData, vUrlName) {
 	const Discord = require('discord.js');
 	let vaulted = '';
 	if (!vData.Traits.includes('Vaulted')) {
@@ -161,4 +156,4 @@ function embedWeapon(client, message, vData, vUrlName) {
 		.setURL('https://warframe.fandom.com/wiki/' + vUrlName)
 		.setThumbnail(client.user.displayAvatarURL);
 	message.channel.send(embed);
-}
+};
