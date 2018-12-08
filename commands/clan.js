@@ -38,8 +38,8 @@ exports.run = async (client, message, args) => {
 		}
 		message.delete();
 		client.udf.commandReact(message, 1);
-		message.member.removeRole(uvRole.id);
-		message.member.addRole(targetRole.id);
+		await message.member.removeRole(uvRole.id);
+		await message.member.addRole(targetRole.id);
 		const currentName = message.member.displayName;
 		message.member.setNickname(`${currentName} [${clanName}]`).catch(err => {
 			console.error(err);
