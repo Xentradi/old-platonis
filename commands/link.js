@@ -25,8 +25,10 @@ exports.run = async (client, message, args) => {
 		client.logger.log('info', 'Ability linked');
 		client.warframe.embedAbility(client, message, data, name, urlName);
 	}
+	/*
 	if (data.Class) {
 		client.logger.log('info', 'Weapon linked');
 		client.warframe.embedWeapon(client, message, data, urlName);
 	}
+	*/
 };

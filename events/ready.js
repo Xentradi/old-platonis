@@ -20,11 +20,13 @@ module.exports = client => {
 		client.warframe.warframes = body.data.Warframes;
 		client.logger.log('info', 'warframe.warframes updated');
 	});
+	/*
 	request('https://wf.snekw.com/weapons-wiki', { json: true }, (err, res, body) => {
 		if (err) { return console.log(err); }
 		client.warframe.weapons = body.data.Weapons;
 		client.logger.log('info', 'warframe.weapons updated');
 	});
+	*/
 	request('https://wf.snekw.com/ability-wiki', { json: true }, (err, res, body) => {
 		if (err) { return console.log(err); }
 		client.warframe.abilities = body.data.Ability;
