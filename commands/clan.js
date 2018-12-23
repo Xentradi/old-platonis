@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
 	if (command === 'join') {
 		const targetRole =
 			message.guild.roles.find(x => x.name === clanName) || false;
-		const uvRole = message.guild.roles.find(x => x.name === 'uv');
+		//const uvRole = message.guild.roles.find(x => x.name === 'uv');
 		if (!roles.has(targetRole.id)) {
 			client.udf.commandReact(message, 0);
 			console.log(message.guild.roles.has(targetRole));
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
 		}
 		message.delete();
 		client.udf.commandReact(message, 1);
-		message.member.removeRole(uvRole.id);
+		//message.member.removeRole(uvRole.id);
 		message.member.addRole(targetRole.id);
 		const currentName = message.member.displayName;
 		message.member.setNickname(`${currentName} [${clanName}]`).catch(err => {
