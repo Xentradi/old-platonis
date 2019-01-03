@@ -15,6 +15,7 @@
 		"discord.js": "^11.4.2",
 		"enmap": "^4.3.3",
 		"express": "^4.16.4",
+		"firebase-admin": "^6.3.0",
 		"fs": "^0.0.1-security",
 		"node-fetch": "^2.3.0",
 		"path": "^0.12.7",

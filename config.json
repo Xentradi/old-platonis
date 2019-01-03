@@ -2,6 +2,7 @@
 	"userid": "517745090714927134",
 	"owner": "135206040080744448",
 	"prefix": "/",
+	"queryPrefix": "?",
 	"activityType": "Playing",
-	"activityText": "shogi"
+	"activityText": "Flappy Zephyr"
 }

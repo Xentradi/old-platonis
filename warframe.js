@@ -2,6 +2,10 @@ var exports = module.exports = {};
 
 exports.api = 'https://api.warframestat.us/';
 
+// wiki api
+// https://warframe.fandom.com/api.php
+// https://warframe.fandom.com/index.php?action=raw&title=Ferrite
+
 exports.fetchMods = function(vModName) {
 	const request = require('request');
 	return new Promise(function(resolve, reject) {

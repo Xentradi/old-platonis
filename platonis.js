@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const Enmap = require('enmap');
 const winston = require('winston');
+const request = require('request');
+const admin = require('firebase-admin');
+
 
 const client = new Discord.Client({ disableEveryone: true });
 
@@ -20,9 +23,16 @@ const config = include('config.json');
 const token = include('token.json').token;
 const warframe = include('warframe.js');
 const functions = include('functions.js');
+let serviceAccount = include('platonis-x3n-a3bb8b7802df.json');
 client.warframe = warframe;
 client.config = config;
 client.udf = functions;
+
+
+admin.initializeApp({
+	credential: admin.credential.cert(serviceAccount),
+});
+client.db = admin.firestore();
 
 // create winston logger
 const logger = winston.createLogger({
@@ -67,6 +77,47 @@ fs.readdir('./commands/', (err, files) => {
 		// Here we simply store the whole thing in the command Enmap. We're not running it right now.
 		client.commands.set(commandName, props);
 	});
+});
+
+
+client.query = new Enmap();
+// This loop reads the commandDirs array from config.json and loops through each directory in the /commands/ folder.
+fs.readdir('./query/', (err, files) => {
+	if (err) return console.error(err);
+	files.forEach(file => {
+		if (!file.endsWith('.js')) return;
+		// Load the command file itself
+		const props = require(`./query/${file}`);
+		// Get just the command name from the file name
+		const queryName = file.split('.')[0];
+		client.logger.log('info', `Loading query command ${queryName}`);
+		// Here we simply store the whole thing in the command Enmap. We're not running it right now.
+		client.query.set(queryName, props);
+	});
+});
+
+
+// things to do before login
+
+request('https://wf.snekw.com/mods-wiki', { json: true }, (err, res, body) => {
+	if (err) { return console.log(err); }
+	client.warframe.mods = body.data.Mods;
+	client.logger.log('info', 'warframe.mods updated');
+});
+request('https://wf.snekw.com/warframes-wiki', { json: true }, (err, res, body) => {
+	if (err) { return console.log(err); }
+	client.warframe.warframes = body.data.Warframes;
+	client.logger.log('info', 'warframe.warframes updated');
+});
+request('https://wf.snekw.com/weapons-wiki', { json: true }, (err, res, body) => {
+	if (err) { return console.log(err); }
+	client.warframe.weapons = body.data.Weapons;
+	client.logger.log('info', 'warframe.weapons updated');
+});
+request('https://wf.snekw.com/ability-wiki', { json: true }, (err, res, body) => {
+	if (err) { return console.log(err); }
+	client.warframe.abilities = body.data.Ability;
+	client.logger.log('info', 'warframe.abilities updated');
 });
 
 
